@@ -1,0 +1,83 @@
+resource "aws_security_group" "flask_sg" {
+
+  name   = "flask-security-group"
+
+  vpc_id = var.vpc_id
+
+  ingress {
+
+    description = "SSH"
+
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+
+    description = "Flask Port"
+
+    from_port = 5000
+    to_port   = 5000
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "flask-security-group"
+  }
+}
+
+resource "aws_security_group" "express_sg" {
+
+  name   = "express-security-group"
+
+  vpc_id = var.vpc_id
+
+  ingress {
+
+    description = "SSH"
+
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+
+    description = "Express Port"
+
+    from_port = 3000
+    to_port   = 3000
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "express-security-group"
+  }
+}
